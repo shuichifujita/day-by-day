@@ -1,22 +1,28 @@
 # coding: utf-8
-default_word = "しりとりしましょう"
+puts "しりとりしましょう"
 
-input = gets
-input.chomp!
+def valid(str_ipt, str_last)
+  str_ipt == "quit" || str_ipt.split("")[0] != str_last || str_ipt.match(/.*\ん$/)
+end
 
-while input != "quit" do
-  # ケツを取る
-  ketsu = input.split("").reverse[0].to_s
-  puts ketsu
+input = gets.chomp!
+ketsu = input[-1]
+puts ketsu
+puts valid(input, ketsu)
 
+while valid(input, ketsu) do
   # 入力
-  input = gets
-  input.chomp!
+  input = gets.chomp!
+
+  # ケツを取る
+  ketsu = input[-1]
 
   # 判定
-  if input == "quit" || input.split("")[0] != ketsu || input.match(/.*\ん$/)
+  if valid(input, ketsu)
     break
   end
+
+  puts "#{input} => #{ketsu}"
 end
 
 puts "The end."
